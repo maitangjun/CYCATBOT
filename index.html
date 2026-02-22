@@ -829,19 +829,19 @@
             reusedToday: false,
             loading: false,
             checkFortuneLimit() {
-                const today = new Date().toDateString();
-                const lastDate = localStorage.getItem('lastFortuneDate');
+                const today = new Date().toISOString().slice(0,10);
+                const lastISO = localStorage.getItem('lastFortuneDateISO');
                 const lastText = localStorage.getItem('lastFortuneText');
-                this.reusedToday = !!(lastDate === today &amp;&amp; lastText);
+                this.reusedToday = !!(lastISO === today && lastText);
                 this.fortune = this.reusedToday ? lastText : '';
             },
             saveFortune(text) {
-                const today = new Date().toDateString();
-                localStorage.setItem('lastFortuneDate', today);
+                const today = new Date().toISOString().slice(0,10);
+                localStorage.setItem('lastFortuneDateISO', today);
                 localStorage.setItem('lastFortuneText', text);
             },
             resetTodayFortune() {
-                localStorage.removeItem('lastFortuneDate');
+                localStorage.removeItem('lastFortuneDateISO');
                 localStorage.removeItem('lastFortuneText');
                 this.fortune = '';
                 this.reusedToday = false;
@@ -850,11 +850,9 @@
             async drawFortune() {
                 this.loading = true;
                 try {
-                    const url = `/api/fortune?ts=${Date.now()}`;
+                    const apiBase = (location.port === '8800') ? 'http://localhost:8000' : '';
+                    const url = `${apiBase}/api/fortune?ts=${Date.now()}`;
                     let res = await fetch(url, { cache: 'no-store' });
-                    if (!res.ok) {
-                        res = await fetch(url, { cache: 'no-store' });
-                    }
                     if (!res.ok) throw new Error('Bad response');
                     const d = await res.json();
                     const txt = d &amp;&amp; d.fortune ? d.fortune : '';
@@ -877,7 +875,8 @@
                 const controller = new AbortController();
                 const timer = setTimeout(() =&gt; controller.abort(), 30000);
                 try {
-                    const res = await fetch('/api/wishes', {
+                    const apiBase = (location.port === '8800') ? 'http://localhost:8000' : '';
+                    const res = await fetch(`${apiBase}/api/wishes`, {
                         method: 'POST',
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({content: this.wish}),
