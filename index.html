@@ -829,35 +829,49 @@
             reusedToday: false,
             loading: false,
             checkFortuneLimit() {
-                const today = new Date().toISOString().slice(0,10);
-                const lastISO = localStorage.getItem('lastFortuneDateISO');
+                // 使用本地日期 (YYYY-MM-DD) 来避免时区问题
+                const getLocalDate = () => {
+                    const d = new Date();
+                    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+                }
+                const today = getLocalDate();
+                const lastDate = localStorage.getItem('lastFortuneDate');
                 const lastText = localStorage.getItem('lastFortuneText');
-                
-                // Check if it's a new day - if so, clear old fortune
-                if (lastISO && lastISO !== today) {
-                    // It's a new day, allow fresh draw
-                    this.fortune = '';
-                    this.reusedToday = false;
-                } else if (lastISO === today && lastText) {
-                    // Same day, show previous fortune
+
+                if (lastDate === today && lastText) {
+                    // 今天已经抽过，显示之前的结果
                     this.fortune = lastText;
                     this.reusedToday = true;
                 } else {
-                    // No previous fortune or first time
+                    // 新的一天或首次抽签
                     this.fortune = '';
                     this.reusedToday = false;
+                    if (lastDate !== today) {
+                        // 如果是新的一天，清除旧的记录
+                        localStorage.removeItem('lastFortuneDate');
+                        localStorage.removeItem('lastFortuneText');
+                    }
                 }
             },
             saveFortune(text) {
-                const today = new Date().toISOString().slice(0,10);
-                localStorage.setItem('lastFortuneDateISO', today);
+                const getLocalDate = () => {
+                    const d = new Date();
+                    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+                }
+                const today = getLocalDate();
+                localStorage.setItem('lastFortuneDate', today);
                 localStorage.setItem('lastFortuneText', text);
             },
             resetTodayFortune() {
-                localStorage.removeItem('lastFortuneDateISO');
+                // 强制清除所有抽签相关数据
+                localStorage.removeItem('lastFortuneDate');
                 localStorage.removeItem('lastFortuneText');
+                
+                // 重置状态
                 this.fortune = '';
                 this.reusedToday = false;
+                
+                // 立即重新抽签
                 this.drawFortune();
             },
             async drawFortune() {
@@ -885,24 +899,33 @@
             async sendWish() {
                 if (!this.wish) return;
                 this.loading = true;
-                const controller = new AbortController();
-                const timer = setTimeout(() =&gt; controller.abort(), 30000);
+                
+                // 本地许愿功能 - 无需服务器
                 try {
-                    const apiBase = (location.port === '8800') ? 'http://localhost:8000' : '';
-                    const res = await fetch(`${apiBase}/api/wishes`, {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({content: this.wish}),
-                        signal: controller.signal
+                    // 保存到本地存储
+                    const wishes = JSON.parse(localStorage.getItem('cyWishes') || '[]');
+                    wishes.push({
+                        content: this.wish,
+                        timestamp: new Date().toISOString(),
+                        id: Date.now()
                     });
-                    if (!res.ok) throw new Error('Bad response');
-                    const d = await res.json();
-                    this.wishResponse = d.response || '愿望已送达，我们会尽快查看您的留言。';
+                    localStorage.setItem('cyWishes', JSON.stringify(wishes));
+                    
+                    // 模拟AI回复
+                    const responses = [
+                        '你的愿望已经收到，CY会认真考虑的！',
+                        '愿望已记录，愿你心想事成！',
+                        '收到你的愿望了，希望一切顺利！',
+                        '愿望已送达，保持希望！',
+                        '你的愿望很美好，祝你实现！'
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    
+                    this.wishResponse = randomResponse;
                     this.wish = '';
                 } catch (e) {
-                    this.wishResponse = '网络打盹了，请稍后再试。';
+                    this.wishResponse = '许愿功能暂时不可用，请稍后再试。';
                 } finally {
-                    clearTimeout(timer);
                     this.loading = false;
                 }
             }
