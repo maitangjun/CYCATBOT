@@ -1,0 +1,17 @@
+**Project Number**: 15
+
+"Feather" is a futuristic personal mobility companion robot with autonomous flight capabilities. It integrates modular design, advanced material science, and artificial intelligence to provide users with an extremely lightweight, efficient, and intelligent solution for short-distance travel.
+
+Design Philosophy
+
+"Light as a feather, solid as a rock" is the core design philosophy of "Feather." We pursue not only physical lightness but also a "zero burden" user experience. Through highly integrated design, we seamlessly blend complex mechanical structures with intelligent systems to create a futuristic personal vehicle that is both beautiful and practical.
+
+ Core Functions
+
+1.  Autonomous Flight and Intelligent Navigation**: Equipped with high-precision sensors and AI path-planning algorithms, it can achieve centimeter-level positioning and dynamic obstacle avoidance, ensuring safe flight in complex urban environments.
+
+2.  Modularization and Personalization**: Users can quickly swap functional modules such as batteries, cargo, and imaging according to their needs. The body paint, lighting effects, and voice prompts are all highly customizable to reflect personal style.
+
+3.  Human-Computer Interaction and Biometrics**: It enables intuitive and natural human-computer interaction through voice commands, gesture control, and seamless integration with personal smart devices. Integrated biometric technology ensures exclusive usage rights.
+
+4.  Senseless Rental Ecosystem (New Model of Shared Mobility)**: Supports a shared rental network in airports, high-speed rail stations, and tourist attractions around the world. Users can quickly borrow and return through biometric identification, achieving "remote pick-up and return, cloud replenishment," and it is the core service terminal for future smart scenic spots and hub travel.
