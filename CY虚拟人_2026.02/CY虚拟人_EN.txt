@@ -1,5 +1,0 @@
-**Project Name**: CY Virtual Human
-**Date**: 2026.02
-**Project No**: 05
-
-The CY Virtual Human project is a design experiment on digital identity and future interaction. It explores how personal image is reshaped and extended through digital technology in the metaverse and AI era, constructing a virtual avatar that is both realistic and full of sci-fi essence.
