@@ -1,0 +1,5 @@
+**Project Name**: Snowball (雪宝)
+**Date**: 2026.03
+**Project No**: 16
+
+Snowball is a smart home service robot specializing in outdoor yard maintenance. It serves as an efficient snow shoveling expert and a diligent lawn mowing assistant, providing all-season yard care solutions for users.
