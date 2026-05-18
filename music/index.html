@@ -1,120 +1,187 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>数字音乐人 - CY的人·咪·机器人</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字音乐 - CY的人.咪.机器人</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script defer="" src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=Share+Tech+Mono&display=swap');
         body { background: #ffffff; color: #000000; font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif; }
         .font-mech { font-family: 'Share Tech Mono', monospace; font-weight: 800; letter-spacing: .05em; }
         .grid-bg { background-image: radial-gradient(#e5e7eb 1px, transparent 1px); background-size: 24px 24px; }
         [x-cloak] { display: none !important; }
-        .font-art { font-family: 'Share Tech Mono', monospace; letter-spacing: .08em; }
-        .player-btn { width: 40px; height: 40px; border: 1px solid #000; border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center; }
-        .player-track { height: 3px; background: #e5e7eb; border-radius: 9999px; }
-        .player-progress { height: 3px; background: #000; border-radius: 9999px; width: 33%; }
+        .music-card {
+            border-left: 2px solid #000;
+            padding-left: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .music-card:hover {
+            border-left-color: #7B61FF;
+            background: rgba(123, 97, 255, 0.02);
+        }
     </style>
 </head>
 <body class="bg-white text-black antialiased grid-bg">
-<nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md border-b border-gray-200 transition-all duration-300" id="global-nav" style="z-index: 1000 !important;" x-data="{ mobileMenuOpen: false, aigcOpen: false }">
+    <nav id="global-nav" class="fixed top-0 w-full bg-white/90 backdrop-blur-md border-b border-gray-200 transition-all duration-300" x-data="{ mobileMenuOpen: false, aigcOpen: false }" style="z-index: 1000 !important;">
     <div class="max-w-[1200px] mx-auto px-10">
         <div class="flex items-center justify-between h-16 md:h-20">
             <!-- Logo -->
             <div class="flex-shrink-0 pr-4 md:pr-8">
-                <a class="mr-4 md:mr-8 text-lg sm:text-xl md:text-2xl font-mech font-bold tracking-widest text-black hover:text-purple-600 transition-colors whitespace-nowrap" href="../index.html">
-                    CY的人·咪·机器人
+                <a href="../index.html" class="mr-4 md:mr-8 text-lg sm:text-xl md:text-2xl font-mech font-bold tracking-widest text-black hover:text-purple-600 transition-colors whitespace-nowrap">
+                    CY的人.咪.机器人
                 </a>
             </div>
+
             <!-- Right side: Navigation links + Language switcher -->
             <div class="hidden md:flex items-center space-x-8">
                 <div class="flex items-center space-x-8 text-sm md:text-base font-mech font-bold tracking-wider text-black">
-                    <div @mouseenter="aigcOpen = true" @mouseleave="aigcOpen = false" class="relative">
+                    <div class="relative" @mouseenter="aigcOpen = true" @mouseleave="aigcOpen = false">
                         <button @click="aigcOpen = !aigcOpen" class="text-black font-bold hover:opacity-70 transition-opacity flex items-center py-2 select-none">
                             AIGC创作
-                            <svg aria-hidden="true" class="ml-1 h-3 w-3" fill="none" viewbox="0 0 10 6">
-                                <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+                            <svg class="ml-1 h-3 w-3" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                              <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
-                        <div @click.away="aigcOpen = false" class="absolute left-0 top-full mt-0 w-28 bg-white border border-gray-200 rounded-lg shadow-lg transition-all duration-150 origin-top-left flex flex-col font-sans" style="z-index: 1001;" x-cloak="" x-show="aigcOpen">
-                            <a class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity border-b border-gray-100 last:border-0 tracking-wide" href="../robots/index.html">机器人</a>
-                            <a class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity border-b border-gray-100 last:border-0 tracking-wide" href="../shortfilm/index.html">短片</a>
-                            <a class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity border-b border-gray-100 last:border-0 tracking-wide" href="../art/index.html">艺术</a>
-                            <a class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity border-b border-gray-100 last:border-0 tracking-wide" href="../design/index.html">设计</a>
-                            <a class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity border-b border-gray-100 last:border-0 tracking-wide" href="index.html">数字音乐人</a>
-                            <a class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity last:border-0 tracking-wide" href="../curation/index.html">策展</a>
+                        <div x-show="aigcOpen" x-cloak @click.away="aigcOpen = false"
+                             class="absolute left-0 top-full mt-0 w-28 bg-white border border-gray-200 rounded-lg shadow-lg transition-all duration-150 origin-top-left flex flex-col font-sans" style="z-index: 1001;">
+                            <a href="../robots/index.html" class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity border-b border-gray-100 last:border-0 tracking-wide">机器人</a>
+                            <a href="../design/index.html" class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity border-b border-gray-100 last:border-0 tracking-wide">设计</a>
+                            <a href="../shortfilm/index.html" class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity border-b border-gray-100 last:border-0 tracking-wide">短片</a>
+                            <a href="../art/index.html" class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity border-b border-gray-100 last:border-0 tracking-wide">艺术</a>
+                            <a href="../music/index.html" class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity border-b border-gray-100 last:border-0 tracking-wide">数字音乐</a>
+                            <a href="../curation/index.html" class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity last:border-0 tracking-wide">策展</a>
                         </div>
                     </div>
-                    <a class="text-black font-bold hover:opacity-70 transition-opacity" href="../ai-projects/index.html">AI项目</a>
-                    <a class="text-black font-bold hover:opacity-70 transition-opacity" href="../follows/index.html">关注与合作</a>
+                    <a href="../ai-projects/index.html" class="text-black font-bold hover:opacity-70 transition-opacity">AI项目</a>
+                    <a href="../follows/index.html" class="text-black font-bold hover:opacity-70 transition-opacity">关注与合作</a>
                 </div>
-                <div class="cursor-pointer text-sm font-bold text-black hover:opacity-70 transition-opacity select-none" onclick="toggleLang()">
+                <div onclick="toggleLang()" class="cursor-pointer text-sm font-bold text-black hover:opacity-70 transition-opacity select-none">
                     中文 <span class="mx-1">/</span> En
                 </div>
             </div>
+
             <!-- Mobile menu button -->
             <div class="flex md:hidden">
                 <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-black hover:text-black focus:outline-none">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-                        <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
             </div>
         </div>
     </div>
     <!-- Mobile menu -->
-    <div class="md:hidden bg-white border-b border-gray-200" x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-end="opacity-100 translate-y-0" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:leave="transition ease-in duration-150" x-transition:leave-end="opacity-0 -translate-y-2" x-transition:leave-start="opacity-100 translate-y-0">
+    <div x-show="mobileMenuOpen" 
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 -translate-y-2"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 -translate-y-2"
+         class="md:hidden bg-white border-b border-gray-200">
         <div class="px-4 pt-2 pb-4 space-y-1">
-            <a class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md" href="../robots/index.html">AIGC创作 - 机器人</a>
-            <a class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md" href="../shortfilm/index.html">AIGC创作 - 短片</a>
-            <a class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md" href="../art/index.html">AIGC创作 - 艺术</a>
-            <a class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md" href="../design/index.html">AIGC创作 - 设计</a>
-            <a class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md" href="index.html">AIGC创作 - 数字音乐人</a>
-            <a class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md" href="../curation/index.html">AIGC创作 - 策展</a>
-            <a class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md" href="../ai-projects/index.html">AI项目</a>
-            <a class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md" href="../follows/index.html">关注与合作</a>
+            <a href="../robots/index.html" class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md">机器人</a>
+            <a href="../design/index.html" class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md">设计</a>
+            <a href="../shortfilm/index.html" class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md">短片</a>
+            <a href="../art/index.html" class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md">艺术</a>
+            <a href="../music/index.html" class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md">数字音乐</a>
+            <a href="../curation/index.html" class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md">策展</a>
+            <a href="../ai-projects/index.html" class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md">AI项目</a>
+            <a href="../follows/index.html" class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md">关注与合作</a>
             <div class="mt-4 px-3 flex items-center space-x-4">
                 <span class="text-sm font-bold text-black">Language:</span>
-                <div class="cursor-pointer text-xs font-bold text-black hover:opacity-70 transition-opacity select-none" onclick="toggleLang()">
+                <div onclick="toggleLang()" class="cursor-pointer text-xs font-bold text-black hover:opacity-70 transition-opacity select-none">
                     中文 <span class="mx-1">/</span> EN
                 </div>
             </div>
         </div>
     </div>
 </nav>
-<main class="pt-24 md:pt-28 pb-12 md:pb-16 bg-pure-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-6 md:mb-8 animate__animated animate__fadeInDown">
-            <h1 class="text-2xl md:text-4xl font-black mb-2 tracking-tight text-black">
-                数字音乐人
-            </h1>
-            <p class="text-xs md:text-base text-black font-mono mt-1 md:mt-2 tracking-widest">
-                CY的数字音乐实验与虚拟乐队
-            </p>
-        </div>
-        <div class="max-w-3xl mx-auto mt-10 space-y-10">
-            <div class="p-1">
-                <div class="text-xs text-gray-500 font-mono tracking-widest mb-2">TRACK 01</div>
-                <h2 class="font-art text-lg md:text-xl font-extrabold text-black mb-2">《机器人，诗，赛博霓虹》</h2>
-                <div class="flex items-center gap-4">
-                    <a href="https://suno.com/s/sBAnA2v8z4yokrz9" target="_blank" class="player-btn text-black hover:bg-black hover:text-white transition">▶</a>
-                    <div class="flex-1 player-track">
-                        <div class="player-progress"></div>
+
+    <main class="pt-24 md:pt-28 pb-12 md:pb-16 bg-pure-white">
+        <div class="global-container">
+            <div class="text-center mb-10 md:mb-14 animate__animated animate__fadeInDown">
+                <h1 class="text-xl md:text-2xl font-black mb-2 tracking-tighter text-black uppercase">
+                    数字音乐
+                </h1>
+                <p class="text-[10px] md:text-xs text-gray-500 font-mono tracking-[0.3em] uppercase">
+                    数字乐队即将上线
+                </p>
+            </div>
+
+            <div class="max-w-2xl mx-auto space-y-10">
+                <!-- Track 01 -->
+                <div class="music-card group">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="text-[9px] text-gray-400 font-mono tracking-widest uppercase">Track 01 / Cyber Neon</div>
+                        <div class="text-[9px] font-mono text-gray-400 uppercase">03:30</div>
                     </div>
-                    <div class="text-xs font-mono text-gray-600">00:00 / 03:30</div>
-                    <a href="https://suno.com/s/sBAnA2v8z4yokrz9" target="_blank" class="text-sm font-medium underline decoration-gray-300 hover:decoration-black">在 Suno 播放 →</a>
+                    <h2 class="text-sm md:text-base font-bold text-black mb-2 group-hover:text-purple-600 transition-colors">《机器人，诗，赛博霓虹》</h2>
+                    <div class="flex items-center gap-4 mb-3">
+                        <a href="https://suno.com/s/sBAnA2v8z4yokrz9" target="_blank" class="w-8 h-8 flex items-center justify-center rounded-full border border-black text-black hover:bg-black hover:text-white transition-all transform hover:scale-110">
+                            <svg class="w-3 h-3 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </a>
+                        <div class="flex-1 h-[1px] bg-gray-100 relative">
+                            <div class="absolute inset-y-0 left-0 bg-black w-1/3"></div>
+                        </div>
+                        <a href="https://suno.com/s/sBAnA2v8z4yokrz9" target="_blank" class="text-[10px] font-bold border-b border-gray-300 hover:border-black transition-colors uppercase tracking-wider">Play on Suno</a>
+                    </div>
+                    <p class="text-[10px] md:text-[11px] text-gray-500 leading-relaxed max-w-lg">
+                        来自CYCATBOT的实验电子轻音乐，50年后机器人在霓虹与代码之间游走的城市诗。
+                    </p>
                 </div>
-                <div class="mt-2 text-xs md:text-sm text-gray-700 leading-relaxed">
-                    来自CYCATBOT的实验电子轻音乐，50年后机器人在霓虹与代码之间游走的城市诗。
+
+                <!-- Track 02 -->
+                <div class="music-card group">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="text-[9px] text-gray-400 font-mono tracking-widest uppercase">Track 02 / Future Echo</div>
+                        <div class="text-[9px] font-mono text-gray-400 uppercase">04:12</div>
+                    </div>
+                    <h2 class="text-sm md:text-base font-bold text-black mb-2 group-hover:text-purple-600 transition-colors">《2088的CY》</h2>
+                    <div class="flex items-center gap-4 mb-3">
+                        <a href="https://suno.com/song/3dcf090d-cf6e-4611-9cc6-21c27c4a99c6" target="_blank" class="w-8 h-8 flex items-center justify-center rounded-full border border-black text-black hover:bg-black hover:text-white transition-all transform hover:scale-110">
+                            <svg class="w-3 h-3 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </a>
+                        <div class="flex-1 h-[1px] bg-gray-100 relative">
+                            <div class="absolute inset-y-0 left-0 bg-black w-1/4"></div>
+                        </div>
+                        <a href="https://suno.com/song/3dcf090d-cf6e-4611-9cc6-21c27c4a99c6" target="_blank" class="text-[10px] font-bold border-b border-gray-300 hover:border-black transition-colors uppercase tracking-wider">Play on Suno</a>
+                    </div>
+                    <p class="text-[10px] md:text-[11px] text-gray-500 leading-relaxed max-w-lg">
+                        CY在2088年的数字回响，融合未来主义电子元素。
+                    </p>
                 </div>
+
+                <!-- Track 03 -->
+                <div class="music-card group">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="text-[9px] text-gray-400 font-mono tracking-widest uppercase">Track 03 / Glitch Garden</div>
+                        <div class="text-[9px] font-mono text-gray-400 uppercase">03:55</div>
+                    </div>
+                    <h2 class="text-sm md:text-base font-bold text-black mb-2 group-hover:text-purple-600 transition-colors">《故障花园》</h2>
+                    <div class="flex items-center gap-4 mb-3">
+                        <a href="https://suno.com/song/f0e92b04-73f9-419d-8bb6-693a39d8b505" target="_blank" class="w-8 h-8 flex items-center justify-center rounded-full border border-black text-black hover:bg-black hover:text-white transition-all transform hover:scale-110">
+                            <svg class="w-3 h-3 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </a>
+                        <div class="flex-1 h-[1px] bg-gray-100 relative">
+                            <div class="absolute inset-y-0 left-0 bg-black w-1/5"></div>
+                        </div>
+                        <a href="https://suno.com/song/f0e92b04-73f9-419d-8bb6-693a39d8b505" target="_blank" class="text-[10px] font-bold border-b border-gray-300 hover:border-black transition-colors uppercase tracking-wider">Play on Suno</a>
+                    </div>
+                    <p class="text-[10px] md:text-[11px] text-gray-500 leading-relaxed max-w-lg">
+                        在数字崩坏的边缘，寻找最后一抹有机的情绪色彩。
+                    </p>
+                </div>
+
+                
             </div>
         </div>
-    </div>
-</main>
-<script>
+    </main>
+
+    <script>
         function toggleLang() {
             const currentLang = "zh";
             const newLang = currentLang === "zh" ? "en" : "zh";
