@@ -76,6 +76,17 @@
         .animate-waddle { animation: waddle 0.85s ease-in-out infinite; }
         @keyframes bounce-walk { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
         .animate-bounce-walk { animation: bounce-walk 0.42s ease-in-out infinite; }
+        
+        /* CY Jump Mode Animations */
+        @keyframes wild-jump {
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            25% { transform: translateY(-15px) rotate(5deg) scale(1.05); }
+            50% { transform: translateY(0) rotate(-3deg) scale(1); }
+            75% { transform: translateY(-25px) rotate(2deg) scale(1.08); }
+        }
+        .char-jumping { animation: wild-jump 0.8s ease-in-out infinite !important; }
+        .stage-area.fullscreen { height: 100vh !important; background: transparent !important; }
+        
         [x-cloak] { display: none !important; }
     </style>
 </head>
@@ -85,25 +96,32 @@
 
     <script>
         function playMeow() {
-            const audio = new Audio('/static/audio/meow.mp3');
-            audio.play().catch(() => {});
+            const staticUrl = 'static/audio/meow.mp3';
+            const audio = new Audio(staticUrl);
+            audio.play().catch(e => console.error('Meow failed:', e));
         }
         function playCyVoice() {
+            // Trigger jump mode in the characters component
+            window.dispatchEvent(new CustomEvent('cy-start-jumping'));
+
             const staticUrl = 'static/audio/cy_voice.mp3';
             const text = "CY是创业者以及创作者。CY的人咪机器人是我人工智能时代的 ID。";
             const apiUrl = `/api/tts?text=${encodeURIComponent(text)}`;
             
-            // Try static first
+            console.log('Playing CY voice, trying static:', staticUrl);
             const audio = new Audio(staticUrl);
-            audio.play().catch(() => {
-                // Fallback to API if static fails
+            audio.play().then(() => console.log('Static voice played'))
+            .catch(e => {
+                console.warn('Static voice failed, trying API:', e);
                 const fallbackAudio = new Audio(apiUrl);
-                fallbackAudio.play().catch(() => {});
+                fallbackAudio.play()
+                    .then(() => console.log('API voice played'))
+                    .catch(err => console.error('API voice also failed:', err));
             });
         }
         function characters() {
             const make = (cfg) => ({
-                x: cfg.x, dir: 1, target: cfg.target, speed: cfg.speed,
+                x: cfg.x, y: 0, dir: 1, target: cfg.target, speed: cfg.speed,
                 state: 'walk', pauseUntil: 0,
                 min: cfg.min ?? 4, max: cfg.max ?? 92,
                 mode: cfg.mode ?? 'wander',
@@ -112,16 +130,31 @@
                 patrolMin: cfg.patrolMin ?? null,
                 patrolMax: cfg.patrolMax ?? null,
                 patrolDir: cfg.patrolDir ?? -1,
+                isJumping: false,
             });
             return {
                 cy: make({ x: 14, target: 42, speed: 0.055, mode: 'wander' }),
                 cat: make({ x: 22, target: 48, speed: 0.1, mode: 'follow', followKey: 'cy', followGap: 12 }),
                 bot: make({ x: 72, target: 58, speed: 0.075, mode: 'patrol', patrolMin: 52, patrolMax: 90 }),
+                isFullscreen: false,
                 init() {
                     setInterval(() => { this.step(this.cy); this.step(this.cat); this.step(this.bot); }, 48);
                     setInterval(() => this.rethink(), 2800);
+                    
+                    window.addEventListener('cy-start-jumping', () => {
+                        this.cy.isJumping = true;
+                        this.isFullscreen = true;
+                        this.cy.speed = 0.4; // Slower, more visible movement
+                        setTimeout(() => {
+                            this.cy.isJumping = false;
+                            this.isFullscreen = false;
+                            this.cy.y = 0;
+                            this.cy.speed = 0.055;
+                        }, 10000); // 10 seconds
+                    });
                 },
                 rethink() {
+                    if (this.cy.isJumping) return;
                     if (Math.random() < 0.75) this.pickTarget(this.cy);
                     if (this.bot.mode === 'patrol') {
                         if (this.bot.x <= this.bot.patrolMin + 2) this.bot.patrolDir = 1;
@@ -134,6 +167,25 @@
                     if (Math.random() < 0.35) ch.pauseUntil = Date.now() + 1200 + Math.random() * 2200;
                 },
                 step(ch) {
+                    if (ch.isJumping) {
+                        // Jump all over the place
+                        if (Math.random() < 0.15) {
+                            ch.target = ch.min + Math.random() * (ch.max - ch.min);
+                            ch.targetY = Math.random() * 80; // Jump up to 80% height
+                        }
+                        const dx = ch.target - ch.x;
+                        const dy = (ch.targetY || 0) - ch.y;
+                        
+                        ch.dir = dx > 0 ? 1 : -1;
+                        ch.x += Math.sign(dx) * ch.speed;
+                        ch.y += Math.sign(dy) * ch.speed;
+                        
+                        // Keep within bounds
+                        ch.x = Math.max(ch.min, Math.min(ch.max, ch.x));
+                        ch.y = Math.max(0, Math.min(90, ch.y));
+                        return;
+                    }
+
                     if (ch.mode === 'follow' && ch.followKey) {
                         const lead = this[ch.followKey];
                         ch.target = Math.max(ch.min, Math.min(ch.max, lead.x - ch.followGap + (Math.random() * 6 - 3)));
@@ -337,11 +389,11 @@ AIGC策展平台 「软机器」 前期搭建中
             </div>
         </section>
 
-    <div class="stage-area" x-data="characters()">
-        <div class="stage-floor"></div>
-        <div class="character-container" @click="playCyVoice()" :style="`left: ${cy.x}%; transform: scaleX(${cy.dir})`">
-            <div class="relative w-[5.5rem] md:w-40 h-40 md:h-[17rem] mt-4 md:mt-6" :class="cy.state === 'walk' ? 'char-walk-bob' : 'char-idle-sway'">
-                <div class="char-shadow"></div>
+    <div class="stage-area" :class="isFullscreen ? 'fullscreen' : ''" x-data="characters()">
+        <div class="stage-floor" x-show="!isFullscreen"></div>
+        <div class="character-container" @click="playCyVoice()" :style="`left: ${cy.x}%; bottom: ${cy.y}%; transform: scaleX(${cy.dir})`" :class="cy.isJumping ? 'z-[100]' : ''">
+            <div class="relative w-[5.5rem] md:w-40 h-40 md:h-[17rem] mt-4 md:mt-6" :class="cy.isJumping ? 'char-jumping' : (cy.state === 'walk' ? 'char-walk-bob' : 'char-idle-sway')">
+                <div class="char-shadow" x-show="!cy.isJumping"></div>
                 <img src="static/images/cy-walk-transparent.png?v=11" class="w-full h-full object-contain object-bottom relative z-10" alt="CY">
                 <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-[#7B61FF] text-white text-[10px] px-2 py-0.5 rounded-full font-bold z-20" :style="`transform: scaleX(${cy.dir})`">CY</div>
             </div>
