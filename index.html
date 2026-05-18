@@ -89,15 +89,17 @@
             audio.play().catch(() => {});
         }
         function playCyVoice() {
-            const sources = ['/static/audio/cy_voice.mp3', '/static/audio/cy_full_intro.mp3', '/static/audio/cy_full_intro.wav'];
-            (async () => {
-                for (const src of sources) {
-                    try {
-                        const res = await fetch(src, { method: 'HEAD', cache: 'no-store' });
-                        if (res.ok) { await new Audio(src).play(); return; }
-                    } catch (_) {}
-                }
-            })().catch(() => {});
+            const staticUrl = '/static/audio/cy_voice.mp3';
+            const text = "CY是创业者以及创作者。CY的人咪机器人是我人工智能时代的 ID。";
+            const apiUrl = `/api/tts?text=${encodeURIComponent(text)}`;
+            
+            // Try static first
+            const audio = new Audio(staticUrl);
+            audio.play().catch(() => {
+                // Fallback to API if static fails
+                const fallbackAudio = new Audio(apiUrl);
+                fallbackAudio.play().catch(() => {});
+            });
         }
         function characters() {
             const make = (cfg) => ({
@@ -232,7 +234,7 @@
         <section class="home-hero">
             <div class="hero-avatar"><img src="static/images/touxiang.png" alt="CY"></div>
             <div>
-                <p class="hero-tag">ALL IN AI的创业者 / 策展人 / 创作者</p>
+                <p class="hero-tag">ALL IN AI的创业者/策展人/创作者</p>
                 <p class="hero-name">我是CY陈尧</p>
                 <p class="hero-meta">ENFP｜白羊双子</p>
                 <p class="hero-focus">全球华人AI创投社区 NextbyNEXT 创始人
