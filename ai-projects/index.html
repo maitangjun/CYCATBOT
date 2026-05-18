@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-
 <html lang="zh">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>AI项目 - CY的人·咪·机器人</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800&amp;family=JetBrains+Mono:wght@400;700&amp;family=Share+Tech+Mono&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com"></script>
-<script defer="" src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-<script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI项目 - CY的人.咪.机器人</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800&family=JetBrains+Mono:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -25,8 +24,8 @@
             }
         }
     </script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-<style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
         body { background-color: #ffffff; color: #000000; font-family: 'Inter', sans-serif; overflow-x: hidden; letter-spacing: 0.01em; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
         .font-mech { font-family: 'Share Tech Mono', monospace; font-weight: 800; letter-spacing: .05em; }
@@ -66,14 +65,14 @@
             margin-left: 16px;
             font-weight: 600;
             color: #000000;
-            font-size: 0.875rem;
+            font-size: 0.75rem;
             letter-spacing: 0.05em;
         }
         
-        .card-body { padding: 32px; }
+        .card-body { padding: 24px; }
         
         .section-title {
-            font-size: 1.875rem;
+            font-size: 1.5rem;
             font-weight: 800;
             color: #000000;
             margin-bottom: 0.5rem;
@@ -81,36 +80,37 @@
         
         .section-subtitle {
             color: #000000;
-            font-size: 0.875rem;
-            margin-bottom: 2.5rem;
+            font-size: 0.75rem;
+            margin-bottom: 2rem;
         }
         
         .project-item {
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
             border-bottom: 1px solid #f3f4f6;
         }
         .project-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
         
         .project-name {
-            font-size: 1.25rem;
+            font-size: 1.125rem;
             font-weight: 700;
             color: #000000;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
         
         .project-desc {
+            font-size: 0.875rem;
             color: #000000;
-            line-height: 1.6;
-            margin-bottom: 1rem;
+            line-height: 1.5;
+            margin-bottom: 0.75rem;
         }
         
         .tag-list {
             display: flex;
             gap: 12px;
-            font-size: 0.875rem;
+            font-size: 0.75rem;
             color: #000000;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
         .tag-list strong { color: #000000; }
         
@@ -189,176 +189,180 @@
         }
         .mech-vibe { animation: mech-vibe 1.6s ease-in-out infinite; }
     </style>
-</link></head>
+</head>
 <body class="bg-white text-black min-h-screen overflow-x-hidden relative">
-<!-- Navigation (Light Theme) -->
-<nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md border-b border-gray-200 transition-all duration-300" id="global-nav" style="z-index: 1000 !important;" x-data="{ mobileMenuOpen: false, aigcOpen: false }">
-<div class="max-w-[1200px] mx-auto px-10">
-<div class="flex items-center justify-between h-16 md:h-20">
-<!-- Logo -->
-<div class="flex-shrink-0 pr-4 md:pr-8">
-<a class="mr-4 md:mr-8 text-lg sm:text-xl md:text-2xl font-mech font-bold tracking-widest text-black hover:text-purple-600 transition-colors whitespace-nowrap" href="../index.html">
-                    CY的人·咪·机器人
+
+    <!-- Navigation (Light Theme) -->
+    <nav id="global-nav" class="fixed top-0 w-full bg-white/90 backdrop-blur-md border-b border-gray-200 transition-all duration-300" x-data="{ mobileMenuOpen: false, aigcOpen: false }" style="z-index: 1000 !important;">
+    <div class="max-w-[1200px] mx-auto px-10">
+        <div class="flex items-center justify-between h-16 md:h-20">
+            <!-- Logo -->
+            <div class="flex-shrink-0 pr-4 md:pr-8">
+                <a href="../index.html" class="mr-4 md:mr-8 text-lg sm:text-xl md:text-2xl font-mech font-bold tracking-widest text-black hover:text-purple-600 transition-colors whitespace-nowrap">
+                    CY的人.咪.机器人
                 </a>
-</div>
-<!-- Right side: Navigation links + Language switcher -->
-<div class="hidden md:flex items-center space-x-8">
-<div class="flex items-center space-x-8 text-sm md:text-base font-mech font-bold tracking-wider text-black">
-<div @mouseenter="aigcOpen = true" @mouseleave="aigcOpen = false" class="relative">
-<button @click="aigcOpen = !aigcOpen" class="text-black font-bold hover:opacity-70 transition-opacity flex items-center py-2 select-none">
+            </div>
+
+            <!-- Right side: Navigation links + Language switcher -->
+            <div class="hidden md:flex items-center space-x-8">
+                <div class="flex items-center space-x-8 text-sm md:text-base font-mech font-bold tracking-wider text-black">
+                    <div class="relative" @mouseenter="aigcOpen = true" @mouseleave="aigcOpen = false">
+                        <button @click="aigcOpen = !aigcOpen" class="text-black font-bold hover:opacity-70 transition-opacity flex items-center py-2 select-none">
                             AIGC创作
-                            <svg aria-hidden="true" class="ml-1 h-3 w-3" fill="none" viewbox="0 0 10 6">
-<path d="M1 1l4 4 4-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
-</svg>
-</button>
-<div @click.away="aigcOpen = false" class="absolute left-0 top-full mt-0 w-28 bg-white border border-gray-200 rounded-lg shadow-lg transition-all duration-150 origin-top-left flex flex-col font-sans" style="z-index: 1001;" x-cloak="" x-show="aigcOpen">
-<a class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity border-b border-gray-100 last:border-0 tracking-wide" href="../robots/index.html">机器人</a>
-<a class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity border-b border-gray-100 last:border-0 tracking-wide" href="../shortfilm/index.html">短片</a>
-<a class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity border-b border-gray-100 last:border-0 tracking-wide" href="../art/index.html">艺术</a>
-<a class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity border-b border-gray-100 last:border-0 tracking-wide" href="../design/index.html">设计</a>
-<a class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity border-b border-gray-100 last:border-0 tracking-wide" href="../music/index.html">数字音乐人</a>
-<a class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity last:border-0 tracking-wide" href="../aigc/curation/index.html">策展</a>
-</div>
-</div>
-<a class="text-black font-bold hover:opacity-70 transition-opacity" href="index.html">AI项目</a>
-<a class="text-black font-bold hover:opacity-70 transition-opacity" href="../follows/index.html">关注与合作</a>
-</div>
-<div class="cursor-pointer text-sm font-bold text-black hover:opacity-70 transition-opacity select-none" onclick="toggleLang()">
+                            <svg class="ml-1 h-3 w-3" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                              <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div x-show="aigcOpen" x-cloak @click.away="aigcOpen = false"
+                             class="absolute left-0 top-full mt-0 w-28 bg-white border border-gray-200 rounded-lg shadow-lg transition-all duration-150 origin-top-left flex flex-col font-sans" style="z-index: 1001;">
+                            <a href="../robots/index.html" class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity border-b border-gray-100 last:border-0 tracking-wide">机器人</a>
+                            <a href="../design/index.html" class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity border-b border-gray-100 last:border-0 tracking-wide">设计</a>
+                            <a href="../shortfilm/index.html" class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity border-b border-gray-100 last:border-0 tracking-wide">短片</a>
+                            <a href="../art/index.html" class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity border-b border-gray-100 last:border-0 tracking-wide">艺术</a>
+                            <a href="../music/index.html" class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity border-b border-gray-100 last:border-0 tracking-wide">数字音乐</a>
+                            <a href="../curation/index.html" class="block px-3 py-2 text-sm hover:bg-gray-100 text-black hover:opacity-80 transition-opacity last:border-0 tracking-wide">策展</a>
+                        </div>
+                    </div>
+                    <a href="../ai-projects/index.html" class="text-black font-bold hover:opacity-70 transition-opacity">AI项目</a>
+                    <a href="../follows/index.html" class="text-black font-bold hover:opacity-70 transition-opacity">关注与合作</a>
+                </div>
+                <div onclick="toggleLang()" class="cursor-pointer text-sm font-bold text-black hover:opacity-70 transition-opacity select-none">
                     中文 <span class="mx-1">/</span> En
                 </div>
-</div>
-<!-- Mobile menu button -->
-<div class="flex md:hidden">
-<button @click="mobileMenuOpen = !mobileMenuOpen" class="text-black hover:text-black focus:outline-none">
-<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
-<path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</button>
-</div>
-</div>
-</div>
-<!-- Mobile menu -->
-<div class="md:hidden bg-white border-b border-gray-200" x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-end="opacity-100 translate-y-0" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:leave="transition ease-in duration-150" x-transition:leave-end="opacity-0 -translate-y-2" x-transition:leave-start="opacity-100 translate-y-0">
-<div class="px-4 pt-2 pb-4 space-y-1">
-<a class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md" href="../robots/index.html">AIGC创作 - 机器人</a>
-<a class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md" href="../shortfilm/index.html">AIGC创作 - 短片</a>
-<a class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md" href="../art/index.html">AIGC创作 - 艺术</a>
-<a class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md" href="../design/index.html">AIGC创作 - 设计</a>
-<a class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md" href="../music/index.html">AIGC创作 - 数字音乐人</a>
-<a class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md" href="../aigc/curation/index.html">AIGC创作 - 策展</a>
-<a class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md" href="index.html">AI项目</a>
-<a class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md" href="../follows/index.html">关注与合作</a>
-<div class="mt-4 px-3 flex items-center space-x-4">
-<span class="text-sm font-bold text-black">Language:</span>
-<div class="cursor-pointer text-xs font-bold text-black hover:opacity-70 transition-opacity select-none" onclick="toggleLang()">
+            </div>
+
+            <!-- Mobile menu button -->
+            <div class="flex md:hidden">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-black hover:text-black focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile menu -->
+    <div x-show="mobileMenuOpen" 
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 -translate-y-2"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 -translate-y-2"
+         class="md:hidden bg-white border-b border-gray-200">
+        <div class="px-4 pt-2 pb-4 space-y-1">
+            <a href="../robots/index.html" class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md">机器人</a>
+            <a href="../design/index.html" class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md">设计</a>
+            <a href="../shortfilm/index.html" class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md">短片</a>
+            <a href="../art/index.html" class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md">艺术</a>
+            <a href="../music/index.html" class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md">数字音乐</a>
+            <a href="../curation/index.html" class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md">策展</a>
+            <a href="../ai-projects/index.html" class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md">AI项目</a>
+            <a href="../follows/index.html" class="block px-3 py-2 text-base font-bold text-gray-600 hover:text-purple-600 hover:bg-gray-50 rounded-md">关注与合作</a>
+            <div class="mt-4 px-3 flex items-center space-x-4">
+                <span class="text-sm font-bold text-black">Language:</span>
+                <div onclick="toggleLang()" class="cursor-pointer text-xs font-bold text-black hover:opacity-70 transition-opacity select-none">
                     中文 <span class="mx-1">/</span> EN
                 </div>
-</div>
-</div>
-</div>
+            </div>
+        </div>
+    </div>
 </nav>
-<!-- bubble background removed by request -->
-<!-- Main Content -->
-<main class="font-mech flex-grow relative z-10 px-4 md:px-10 min-h-screen pt-24 pb-16">
-<div class="max-w-7xl mx-auto animate__animated animate__fadeIn">
-<div class="mx-auto w-full max-w-6xl px-2 md:px-6">
-<header class="mt-12 md:mt-16 mb-6 md:mb-8">
-<div class="font-mech font-semibold text-black tracking-wider" x-data="{
-                        lines: ['CY致力于构建AI时代的创新生态，','深度探索AI创投、创作及机器人产业，','驱动实体的商业转化与跨界合作。','也在vibe coding各类便利自己和企业的工作流','欢迎联络。'],
-                        typed: [],
-                        done: false,
-                        i: 0,
-                        j: 0,
-                        speed: 30,
-                        longPause: 240,
-                        punctuations: ['，','。','、',',','.','：',':','；',';'],
-                        init() { this.typed = this.lines.map(() =&gt; ''); this.typeNext(); },
-                        typeNext() {
-                            if (this.i &gt;= this.lines.length) return;
-                            const current = this.lines[this.i];
-                            const step = () =&gt; {
-                                if (this.j &lt; current.length) {
-                                    const ch = current[this.j++];
-                                    this.typed[this.i] += ch;
-                                    const d = this.punctuations.includes(ch) ? this.longPause : this.speed;
-                                    setTimeout(step, d);
-                                } else {
-                                    this.i++; this.j = 0;
-                                    if (this.i &gt;= this.lines.length) { this.done = true; return; }
-                                    setTimeout(() =&gt; this.typeNext(), 260);
-                                }
-                            };
-                            step();
-                        }
-                    }">
-<div class="text-[15px] md:text-lg leading-snug tracking-wide">
-<span :class="{'mech-vibe': i===0 &amp;&amp; !done}" x-text="typed[0]"></span>
-<span class="animate-pulse" x-show="i===0 &amp;&amp; !done">▍</span>
-</div>
-<div class="text-[15px] md:text-lg leading-snug tracking-wide">
-<span :class="{'mech-vibe': i===1 &amp;&amp; !done}" x-text="typed[1]"></span>
-<span class="animate-pulse" x-show="i===1 &amp;&amp; !done">▍</span>
-</div>
-<div class="text-[15px] md:text-lg leading-snug tracking-wide">
-<span :class="{'mech-vibe': i===2 &amp;&amp; !done}" x-text="typed[2]"></span>
-<span class="animate-pulse" x-show="i===2 &amp;&amp; !done">▍</span>
-</div>
-<div class="text-[15px] md:text-lg leading-snug tracking-wide">
-<span :class="{'mech-vibe': i===3 &amp;&amp; !done}" x-text="typed[3]"></span>
-<span class="animate-pulse" x-show="i===3 &amp;&amp; !done">▍</span>
-</div>
-<div class="text-[15px] md:text-lg leading-snug tracking-wide">
-    <span :class="{'mech-vibe': i===4 &amp;&amp; !done}" x-text="typed[4]"></span>
-    <span class="animate-pulse" x-show="i===4 &amp;&amp; !done">▍</span>
-</div>
-</div>
-</header>
-</div>
-<div class="mx-auto w-full max-w-6xl px-2 md:px-6 mt-20 md:mt-28">
-<section class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14">
-<!-- Project 01 -->
-<div class="md:col-span-4 min-h-[240px] flex flex-col">
-<h3 class="text-4xl md:text-5xl font-extrabold mb-2 tracking-tight leading-tight break-words"><span class="ed-number">01.</span>Next by NEXT</h3>
-<p class="text-sm md:text-base leading-snug tracking-wide font-medium mt-3 break-words">链接AI创业者，从业者的核心枢纽。汇聚AI及出海项目，组织创投闭门，OPC，AI创作方向活动，提供AI及出海方向服务。</p>
-<div class="mt-2 flex items-center gap-3 text-xs">
-<span class="font-semibold">状态:</span>
-<span class="text-green-600">运营中</span>
-<a class="ed-link" href="https://xhslink.com/m/9ZXmoLIw73D" target="_blank">访问社区 &gt;</a>
-</div>
-</div>
-        <!-- Project 02 (AI-Vision) -->
-        <div class="md:col-span-4 min-h-[240px] flex flex-col">
-            <h3 class="text-4xl md:text-5xl font-extrabold mb-2 tracking-tight leading-tight break-words"><span class="ed-number">02.</span>AI-Vision</h3>
-            <p class="text-sm md:text-base leading-snug tracking-wide font-medium mt-3 break-words">一个专为普通人设计的全球AI公司财报分析平台。我们相信资本市场的洞见不应是少数专业人士的特权。为你提炼核心投资逻辑，透视公司赚钱模式与技术护城河。打破信息不对称，让普通人也能像专业机构一样，读懂AI时代的底层逻辑。</p>
-            <div class="mt-2 flex items-center gap-3 text-xs">
-                <span class="font-semibold">状态:</span>
-                <span class="text-green-600">运营中</span>
-                <a class="ed-link" href="https://aivision-teal.vercel.app" target="_blank">访问项目 &gt;</a>
-            </div>
-        </div>
-        <!-- Project 03 -->
-        <div class="md:col-span-4 min-h-[240px] flex flex-col">
-            <h3 class="text-4xl md:text-5xl font-extrabold mb-2 tracking-tight leading-tight"><span class="ed-number">03.</span>CyberCoffee with Cy</h3>
-            <p class="text-sm md:text-base leading-snug tracking-wide font-medium mt-3 break-words">“CY的vibe coding项目，CY的AI分身，正在持续优化。可以和CY的分身聊聊，灵感，技术和未来。”</p>
-            <div class="mt-2 flex items-center gap-3 text-xs">
-                <span class="font-semibold">状态:</span>
-                <span class="text-yellow-600">持续优化</span>
-                <a class="ed-link" href="https://cyber-coffee-with-f64d0oqnw-maitangjuns-projects.vercel.app" target="_blank">访问项目 &gt;</a>
-            </div>
-        </div>
 
-        <!-- Project 04 -->
-        <div class="md:col-span-4 min-h-[240px] flex flex-col">
-            <h3 class="text-4xl md:text-5xl font-extrabold mb-2 tracking-tight leading-tight break-words"><span class="ed-number">04.</span>DREAM A ROBOT</h3>
-            <p class="text-sm md:text-base leading-snug tracking-wide font-medium mt-3 break-words">CY设计的机器人概念元宇宙，可以在查看CY的机器人和互动，缓慢上线中。</p>
-            <div class="mt-2 flex items-center gap-3 text-xs">
-                <span class="font-semibold">状态:</span>
-                <span class="text-purple-600">设计中</span>
+    <!-- bubble background removed by request -->
+
+    <!-- Main Content -->
+    <main class="font-mech flex-grow relative z-10 px-4 md:px-10 min-h-screen pt-24 pb-16">
+        <div class="max-w-7xl mx-auto animate__animated animate__fadeIn">
+
+            <div class="mx-auto w-full max-w-6xl px-2 md:px-6 mt-12">
+                <!-- AI Projects Section -->
+                <div class="mb-16">
+                    <h2 class="text-lg md:text-xl font-extrabold mb-10 text-purple-600 border-l-4 border-purple-600 pl-4">AI 项目</h2>
+                    <section class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14">
+                        <!-- Project 01: Next by NEXT -->
+                        <div class="md:col-span-6 lg:col-span-4 min-h-[200px] flex flex-col group">
+                            <h3 class="text-lg md:text-xl font-extrabold mb-2 tracking-tight leading-tight break-words group-hover:text-purple-600 transition-colors">
+                                <span class="ed-number">01.</span>Next by NEXT
+                            </h3>
+                            <p class="text-xs md:text-sm leading-snug tracking-wide font-medium mt-3 break-words text-gray-700">链接AI创业者，从业者的核心枢纽。汇聚AI及出海项目，组织创投闭门，OPC，AI创作方向活动，提供AI及出海方向服务。</p>
+                            <div class="mt-4 flex items-center gap-3 text-xs">
+                                <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded font-bold">运营中</span>
+                                <a href="https://xhslink.com/m/9ZXmoLIw73D" target="_blank" class="ed-link font-bold text-purple-600 hover:text-purple-800">访问社区 &gt;</a>
+                            </div>
+                        </div>
+
+                        <!-- Project 02: 软机器 -->
+                        <div class="md:col-span-6 lg:col-span-4 min-h-[200px] flex flex-col group">
+                            <h3 class="text-lg md:text-xl font-extrabold mb-2 tracking-tight leading-tight break-words group-hover:text-purple-600 transition-colors">
+                                <span class="ed-number">02.</span>软机器
+                            </h3>
+                            <p class="text-xs md:text-sm leading-snug tracking-wide font-medium mt-3 break-words text-gray-700">制作中</p>
+                            <div class="mt-4 flex items-center gap-3 text-xs">
+                                <span class="px-2 py-0.5 bg-purple-100 text-purple-700 rounded font-bold">筹备中</span>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Vibe Coding Projects Section -->
+                <div class="-mt-8">
+                    <h2 class="text-lg md:text-xl font-extrabold mb-10 text-purple-600 border-l-4 border-purple-600 pl-4">vibe coding 项目</h2>
+                    <section class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14">
+                        <!-- Vibe 01: Financial Report Generator -->
+                        <div class="md:col-span-6 lg:col-span-4 min-h-[200px] flex flex-col group">
+                            <h3 class="text-lg md:text-xl font-extrabold mb-2 tracking-tight leading-tight break-words group-hover:text-purple-600 transition-colors">
+                                <span class="ed-number">01.</span>财报生成器
+                            </h3>
+                            <p class="text-xs md:text-sm leading-snug tracking-wide font-medium mt-3 break-words text-gray-700">专为普通人设计的全球AI公司财报分析平台。为你提炼核心投资逻辑，透视公司赚钱模式与技术护城护。让普通人也能读懂AI时代的底层逻辑。</p>
+                            <div class="mt-4 flex items-center gap-3 text-xs">
+                                <span class="px-2 py-0.5 bg-purple-100 text-purple-700 rounded font-bold">运营中</span>
+                                <a href="https://aivision-teal.vercel.app" target="_blank" class="ed-link font-bold text-purple-600 hover:text-purple-800">访问项目 &gt;</a>
+                            </div>
+                        </div>
+
+                        <!-- Vibe 02: CyberCoffee -->
+                        <div class="md:col-span-6 lg:col-span-4 min-h-[200px] flex flex-col group">
+                            <h3 class="text-lg md:text-xl font-extrabold mb-2 tracking-tight leading-tight break-words group-hover:text-purple-600 transition-colors">
+                                <span class="ed-number">02.</span>CyberCoffee with Cy
+                            </h3>
+                            <p class="text-xs md:text-sm leading-snug tracking-wide font-medium mt-3 break-words text-gray-700">“CY的vibe coding项目，CY的AI分身，正在持续优化。可以和CY的分身聊聊，灵感，技术和未来。”</p>
+                            <div class="mt-4 flex items-center gap-3 text-xs">
+                                <span class="px-2 py-0.5 bg-purple-100 text-purple-700 rounded font-bold">持续优化</span>
+                                <a href="https://cyber-coffee-with-cy.cycatbot.online/" target="_blank" class="ed-link font-bold text-purple-600 hover:text-purple-800">访问项目 &gt;</a>
+                            </div>
+                        </div>
+
+                        <!-- Vibe 03: link-list -->
+                        <div class="md:col-span-6 lg:col-span-4 min-h-[200px] flex flex-col group">
+                            <h3 class="text-lg md:text-xl font-extrabold mb-2 tracking-tight leading-tight break-words group-hover:text-purple-600 transition-colors">
+                                <span class="ed-number">03.</span>link-list
+                            </h3>
+                            <p class="text-xs md:text-sm leading-snug tracking-wide font-medium mt-3 break-words text-gray-700">商务日常联络清单工具</p>
+                            <div class="mt-4 flex items-center gap-3 text-xs">
+                                <span class="px-2 py-0.5 bg-purple-100 text-purple-700 rounded font-bold">运营中</span>
+                                <a href="https://link-list.cycatbot.online/" target="_blank" class="ed-link font-bold text-purple-600 hover:text-purple-800">访问项目 &gt;</a>
+                            </div>
+                        </div>
+
+                        <!-- Vibe 04: OPC Game -->
+                        <div class="md:col-span-6 lg:col-span-4 min-h-[200px] flex flex-col group">
+                            <h3 class="text-lg md:text-xl font-extrabold mb-2 tracking-tight leading-tight break-words group-hover:text-purple-600 transition-colors">
+                                <span class="ed-number">04.</span>OPC游戏
+                            </h3>
+                            <p class="text-xs md:text-sm leading-snug tracking-wide font-medium mt-3 break-words text-gray-700">一个OPC小游戏，模拟OPC经营</p>
+                            <div class="mt-4 flex items-center gap-3 text-xs">
+                                <span class="px-2 py-0.5 bg-purple-100 text-purple-700 rounded font-bold">在线玩</span>
+                                <a href="https://solo-operator.vercel.app/" target="_blank" class="ed-link font-bold text-purple-600 hover:text-purple-800">开始游戏 &gt;</a>
+                            </div>
+                        </div>
+                    </section>
+                </div>
             </div>
-        </div>
-</section>
-</div>
-<script>
+
+
+
+    <script>
         function toggleLang() {
             const currentLang = "zh";
             const newLang = currentLang === "zh" ? "en" : "zh";
@@ -373,5 +377,5 @@
             window.location.href = url.toString();
         }
     </script>
-</div></main></body>
+</body>
 </html>
