@@ -11,20 +11,38 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=Share+Tech+Mono&display=swap');
         body { background: #ffffff; color: #000000; font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif; }
         .font-mech { font-family: 'Share Tech Mono', monospace; font-weight: 800; letter-spacing: .05em; }
-        .grid-bg { background-image: radial-gradient(#e5e7eb 1px, transparent 1px); background-size: 24px 24px; }
         [x-cloak] { display: none !important; }
         .music-card {
-            border-left: 2px solid #000;
+            border-left: 1px solid #e5e7eb;
             padding-left: 1.5rem;
+            padding-right: 1rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
             transition: all 0.3s ease;
+            border-radius: 0 12px 12px 0;
+            position: relative;
+            background: #fafafa;
+        }
+        .music-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, #7B61FF, #000);
         }
         .music-card:hover {
-            border-left-color: #7B61FF;
-            background: rgba(123, 97, 255, 0.02);
+            background: #f9f5ff;
+            box-shadow: 0 4px 20px -4px rgba(123, 97, 255, 0.15);
+            transform: translateX(4px);
+        }
+        .global-container {
+            max-width: 900px;
         }
     </style>
 </head>
-<body class="bg-white text-black antialiased grid-bg">
+<body class="bg-white text-black antialiased">
     <nav id="global-nav" class="fixed top-0 w-full bg-white/90 backdrop-blur-md border-b border-gray-200 transition-all duration-300" x-data="{ mobileMenuOpen: false, aigcOpen: false }" style="z-index: 1000 !important;">
     <div class="max-w-[1200px] mx-auto px-10">
         <div class="flex items-center justify-between h-16 md:h-20">
